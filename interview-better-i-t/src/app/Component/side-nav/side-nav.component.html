@@ -1,0 +1,50 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>ADMIN CHATBOT</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['/data-anlytics']">
+        <mat-icon>equalizer</mat-icon>
+        DATA ANALYTICS
+      </a>
+      <a mat-list-item href="#">
+        <mat-icon URLs=""> format_list_bulleted</mat-icon>
+        INTERNSS
+      </a>
+      <a mat-list-item [routerLink]="['/entiters']">
+        <mat-icon>vertical_split</mat-icon>
+        ENTITERS
+      </a>
+      <a mat-list-item href="#">
+        <mat-icon> chat_bubble_outline</mat-icon>
+        CONVERSATION FLOW
+      </a>
+      <a mat-list-item href="#">
+        <mat-icon>device_hub</mat-icon>
+        BUSINESS LOGIC
+      </a>
+      <a mat-list-item href="#">
+        <mat-icon>star_border</mat-icon>
+        RULE-BASED
+      </a>
+      <a mat-list-item href="#">
+        <mat-icon>language</mat-icon>
+        NLP
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button type="button"
+              aria-label="Toggle sidenav"
+              mat-icon-button
+              (click)="drawer.toggle()"
+              *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>interview-better-i-t</span>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
