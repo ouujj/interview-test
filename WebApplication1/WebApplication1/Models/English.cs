@@ -11,6 +11,7 @@ namespace WebApplication1.Models
     {
         public long Id { get; set; }
         public string word { get; set; }
-        
+        public List<Thai> thais { get; set; }
+
     }
 }
