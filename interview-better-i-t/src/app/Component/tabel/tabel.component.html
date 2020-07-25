@@ -1,28 +1,6 @@
-<!--
-<div _ngcontent-rhx-c92="" class="docs-example-viewer-body ng-star-inserted">
-  <table _ngcontent-rhx-c204="" mat-table [dataSource]="dataSource" class="mat-elevation-z8" role="grid">
-
-        <ng-container matColumnDef="VALUE">
-            <th mat-header-cell *matHeaderCellDef> VALUE </th>
-            <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="SYNONYMS">
-            <th mat-header-cell *matHeaderCellDef> SYNONYMS </th>
-            <td mat-cell *matCellDef="let element">
-                {{element.name}}
-        </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-
-</div>
--->
 <mat-card-content>
     <mat-grid-list>
-        <mat-list-item *ngFor="let VALUE of EnginTh_dataSource">
+        <mat-list-item *ngFor="let VALUE of EnginTh_dataSource;let i = index ">
             <mat-card class="example-form">
                 <div>
                     <a>{{VALUE.word}} </a>
@@ -33,7 +11,7 @@
                                [selectable]="selectable"
                                [removable]="removable"
                                (removed)="remove(Thaiword)">
-                        {{SYNONYMS.word}}
+                               {{SYNONYMS.word}}
                         <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                     </mat-chip>
                     <mat-chip>
@@ -41,27 +19,11 @@
                                 [matChipInputFor]="chipList"
                                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                                 [matChipInputAddOnBlur]="addOnBlur"
-                                (matChipInputTokenEnd)="add($event,VALUE.id)">
+                                (matChipInputTokenEnd)="add($event,VALUE.id,i)">
                     </mat-chip>
                 </mat-chip-list>
             </mat-card>
         </mat-list-item>
     </mat-grid-list>
     <br><br>
-    <!--
-    <mat-card class = "example-form"  >
-        <div>
-            <form class="example-form">
-            <mat-form-field class="example-full-width">
-
-                <input matInput placeholder="Ex. Test" [(ngModel)]="EnglishWord" type="string">
-            </mat-form-field>
-
-            <button mat-raised-button  (click)= "addEnglishWord()">Add New Value</button>
-        </form>
-        </div>
-
-    </mat-card>
--->
-
 </mat-card-content>

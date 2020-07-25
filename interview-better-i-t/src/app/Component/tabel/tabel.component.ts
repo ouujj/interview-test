@@ -64,16 +64,20 @@ export class TabelComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
 
-  add(event: MatChipInputEvent, engid: number): void {
+  add(event: MatChipInputEvent, engid: number, i: number): void {
     const input = event.input;
     const value = event.value;
-    console.log(engid);
+   // console.log(engid);
     // Add our fruit
     if ((value || '').trim()) {
-      this.Thai_dataSource.push({ word: value.trim() });
-      console.log(value.trim(), engid);
+      console.log(value.trim(), engid , i);
+
       this.addThaiword(value.trim(), engid).subscribe(data => {
+        this.Thai_dataSource = data;
         console.log("Update Success", data);
+        this.EnginTh_dataSource[i].thais.push({ id : this.Thai_dataSource.id , word: this.Thai_dataSource.word });
+        console.log("Update obj Success", this.EnginTh_dataSource[i]);
+
       },
         error => {
           console.log("Fail", error);
@@ -89,21 +93,14 @@ export class TabelComponent implements OnInit {
   remove(thaiword: Thai): void {
     const index = this.Thai_dataSource.indexOf(thaiword);
 
-    //this.deleteThaiword(this.Thai_dataSource[index]["id"]);
-
     if (index >= 0) {
-      // console.log("Delect Thaiword id : ",this.Thai_dataSource[index]["id"], this.Thai_dataSource[index] );
-      //console.log('http://localhost:44399/api/Thais/',this.Thai_dataSource[index]["id"]);
-
-      //rest api delete
       this.deleteThaiword(this.Thai_dataSource[index]["id"]).subscribe(data => {
         this.Thai_dataSource.splice(index, 1);
         console.log("Delete Success", data);
       },
         error => {
           console.log("Delete Fail", error);
-        });
-
+      });
     }
   }
 
@@ -134,7 +131,7 @@ export class TabelComponent implements OnInit {
     })
 
   }
-  
+
   addEnglishWordApi(word: string) {
     return this.httpClient.post('https://localhost:44399/api/Englishes', {
       'word': word
