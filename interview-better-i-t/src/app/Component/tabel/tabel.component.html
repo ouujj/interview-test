@@ -22,18 +22,18 @@
 -->
 <mat-card-content>
     <mat-grid-list>
-        <mat-list-item *ngFor="let VALUE of dataSource">
+        <mat-list-item *ngFor="let VALUE of EnginTh_dataSource">
             <mat-card class="example-form">
                 <div>
-                    <a>{{VALUE.position}} </a>
+                    <a>{{VALUE.word}} </a>
                 </div>
                 <br>
                 <mat-chip-list #chipList aria-label="Thaiword selection">
-                    <mat-chip  *ngFor="let SYNONYMS of VALUE.name"
+                    <mat-chip  *ngFor="let SYNONYMS of VALUE.thais"
                                [selectable]="selectable"
                                [removable]="removable"
                                (removed)="remove(Thaiword)">
-                        {{SYNONYMS.SYNONYMS}}: {{SYNONYMS.symbol}}
+                        {{SYNONYMS.word}}
                         <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                     </mat-chip>
                     <mat-chip>

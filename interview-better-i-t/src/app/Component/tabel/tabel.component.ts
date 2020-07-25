@@ -134,65 +134,25 @@ export class TabelComponent implements OnInit {
     })
 
   }
+  
   addEnglishWordApi(word: string) {
-
     return this.httpClient.post('https://localhost:44399/api/Englishes', {
       'word': word
     })
   }
 
-  getEnglish() {
-    this.httpClient.get('https://localhost:44399/api/Englishes').subscribe(
+  getEnglishwithThai(){
+
+    this.httpClient.get('https://localhost:44399/api/Englishes/withthaiall').subscribe(
       body => {
-        this.English_dataSource = body;
+        this.EnginTh_dataSource = body;
         console.log("GET English Request is successful ", body);
       }, error => { console.log("Error", error); }
     );
   }
 
-  getThai() {
-    this.httpClient.get('https://localhost:44399/api/Thais').subscribe(
-      body => {
-        this.Thai_dataSource = body;
-        console.log("GET Thai Request is successful ", body);
-
-        this.getEng_include_thai();
-
-
-      }, error => { console.log("Error", error); }
-    );
-  }
-
-  getEng_include_thai() {
-    let buf_engwiththai = [];
-    //  console.log("thai length:",this.Thai_dataSource["length"]);
-    // var index = this.English_dataSource.findIndex(obj => obj.word==this.Thai_dataSource[0]["engId"]);
-    //  console.log(index);
-    for (let indexEng = 0; indexEng < this.English_dataSource["length"]; indexEng++) {
-      //console.log("thai index:",index);
-      /*   this.EnginTh_dataSource.push({
-           id: this.English_dataSource[indexEng]["id"],
-           word:this.English_dataSource[indexEng]["word"]
-         });
-       */
-      for (let indexTh = 0; indexTh < this.Thai_dataSource["length"]; indexTh++) {
-        //console.log("thai index:",index);
-
-        if (this.Thai_dataSource[indexTh]["engId"] == this.English_dataSource[indexEng]["id"]) {
-          console.log(this.Thai_dataSource[indexTh]["word"], this.English_dataSource[indexEng]["word"]);
-          //buf_engwiththai[indexEng] =  this.English_dataSource[indexEng]
-
-
-        }
-      }
-    }
-    console.log(this.EnginTh_dataSource);
-  }
-
   ngOnInit(): void {
-    this.getEnglish();
-    this.getThai();
-    // this.getEng_include_thai();
+      this.getEnglishwithThai();
   }
 
 }
