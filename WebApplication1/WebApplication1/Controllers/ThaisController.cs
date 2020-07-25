@@ -38,17 +38,27 @@ namespace WebApplication1.Controllers
             {
                 return NotFound();
             }
-
+            else
+            {
+                //Console.WriteLine("Id {0} Word {1}",thai.Id ,thai.word);
+            }
             return thai;
         }
 
-        // GET: api/Thais/findeng/5
-        [HttpGet("findByEng/{id}")]
-        public async Task<ActionResult<IEnumerable<Thai>>> GetThaiByEng(long id)
+        // GET: api/Thais/findByEngId/5
+        [HttpGet("findByEngId/{id}")]
+        public  List<Thai> GetThaiByEngId(long id)
         {
-            var thai = await _context.Thais.FindAsync(id);
+            var thaiList = _context.Thais.Where(t => t.EngId == id).Select(tt => new Thai
+            {
+                Id = tt.Id,
+                word = tt.word,
+                English = null,
+                EngId = tt.EngId
 
-            return await _context.Thais.ToListAsync();
+            }).ToList();
+
+            return thaiList;
         }
 
         // PUT: api/Thais/5

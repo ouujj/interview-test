@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
 using WebApplication1.Models;
+using WebApplication1.Controllers;
 
 namespace WebApplication1.Controllers
 {
@@ -46,10 +47,51 @@ namespace WebApplication1.Controllers
 
         // GET: api/Englishes/withthaiall
         [HttpGet("withthaiall")]
-        public async Task<ActionResult<IEnumerable<English>>> GetEnglishesWiththai()
+        public async Task<ActionResult<List<English>>> GetEnglishesWiththai()
         {
-            return await _context.Englishes.ToListAsync();
+            List<English> englishes;
+            englishes = await _context.Englishes.ToListAsync();
+            
+            int i = 0;
+            foreach (var english in englishes)
+            {
+                Console.WriteLine("English ID is {0} and Word is {1}", english.Id, english.word);
+
+                List<Thai> thais;
+                thais = GetThaiByEng(english.Id);
+                englishes[i].thais = thais;
+
+                /*
+                if (thais.Count > 0) 
+                {
+                    englishes[i].thais = thais;
+                    foreach (var  thai in thais) 
+                    {
+                      Console.WriteLine(">>> with Thai ID is {0} and Word is {1}", thai.Id, thai.word);
+                     
+                    }
+                }
+                */
+
+                i++;
+            }
+            return englishes;
         }
+
+        public List<Thai> GetThaiByEng(long id)
+        {
+            var thaiList = _context.Thais.Where(t => t.EngId == id).Select(tt => new Thai
+            {
+                Id = tt.Id,
+                word = tt.word,
+                English = null,
+                EngId = tt.EngId
+
+            }).ToList();
+
+            return thaiList;
+        }
+
 
         // PUT: api/Englishes/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
