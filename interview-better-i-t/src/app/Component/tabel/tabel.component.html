@@ -1,26 +1,24 @@
 <mat-card-content>
     <mat-grid-list>
         <mat-list-item *ngFor="let VALUE of EnginTh_dataSource;let i = index ">
-            <mat-card class="example-form">
+            <mat-card class="example-chip-list">
                 <div>
                     <a>{{VALUE.word}} </a>
                 </div>
                 <br>
-                <mat-chip-list #chipList aria-label="Thaiword selection">
+                <mat-chip-list #chipList aria-label="VALUE.thais selection">
                     <mat-chip  *ngFor="let SYNONYMS of VALUE.thais"
                                [selectable]="selectable"
                                [removable]="removable"
-                               (removed)="remove(Thaiword)">
+                               (removed)="remove(SYNONYMS,i)">
                                {{SYNONYMS.word}}
                         <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                     </mat-chip>
-                    <mat-chip>
                         <input  placeholder="Add Word"
                                 [matChipInputFor]="chipList"
                                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                                 [matChipInputAddOnBlur]="addOnBlur"
                                 (matChipInputTokenEnd)="add($event,VALUE.id,i)">
-                    </mat-chip>
                 </mat-chip-list>
             </mat-card>
         </mat-list-item>

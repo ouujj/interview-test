@@ -4,6 +4,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import {FormControl} from '@angular/forms';
 
 export interface English {
   id: number;
@@ -71,7 +72,6 @@ export class TabelComponent implements OnInit {
     // Add our fruit
     if ((value || '').trim()) {
       console.log(value.trim(), engid , i);
-
       this.addThaiword(value.trim(), engid).subscribe(data => {
         this.Thai_dataSource = data;
         console.log("Update Success", data);
@@ -90,12 +90,14 @@ export class TabelComponent implements OnInit {
     }
   }
 
-  remove(thaiword: Thai): void {
-    const index = this.Thai_dataSource.indexOf(thaiword);
+  remove(thaiword: any, i :number): void {
+    console.log("Delete ", thaiword );
+    const index = this.EnginTh_dataSource[i].thais.indexOf(thaiword);
+    console.log("Delete index", index);
 
     if (index >= 0) {
-      this.deleteThaiword(this.Thai_dataSource[index]["id"]).subscribe(data => {
-        this.Thai_dataSource.splice(index, 1);
+      this.deleteThaiword(this.EnginTh_dataSource[i].thais[index]["id"]).subscribe(data => {
+        this.EnginTh_dataSource[i].thais.splice(index, 1);
         console.log("Delete Success", data);
       },
         error => {
