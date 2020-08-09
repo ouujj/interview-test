@@ -21,6 +21,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +47,8 @@ import { FormsModule } from '@angular/forms';
     MatChipsModule,
     MatInputModule,
     FormsModule,
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]

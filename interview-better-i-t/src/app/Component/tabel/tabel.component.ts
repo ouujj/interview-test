@@ -11,31 +11,17 @@ export interface English {
   word: string;
 }
 
-
-
 export interface Thai {
   id: number;
   word: string;
   EngId: number;
 }
+
 export interface English_incluide_Thai {
   id: number;
   word: string;
   thai: Thai[];
 }
-
-const ELEMENT_DATA: any[] = [
-  {
-    position: 1, name: [{ SYNONYMS: 'Fluorine1', symbol: 'F' },
-    { SYNONYMS: 'Fluorine2', symbol: 'F' },
-    { SYNONYMS: 'Fluorine3', symbol: 'F' }]
-  },
-  {
-    position: 2, name: [{ SYNONYMS: 'Neon1', symbol: 'Ne' },
-    { SYNONYMS: 'Neon2', symbol: 'Ne' }]
-  },
-
-];
 
 @Injectable()
 @Component({
@@ -50,8 +36,6 @@ export class TabelComponent implements OnInit {
   displayedColumns: string[] = ['VALUE', 'SYNONYMS'];
 
   private EnglishWord: string;
-
-  dataSource = ELEMENT_DATA;
 
   English_dataSource: any = {};
 
@@ -131,7 +115,6 @@ export class TabelComponent implements OnInit {
       'word': word,
       'engId': engid
     })
-
   }
 
   addEnglishWordApi(word: string) {
@@ -141,7 +124,6 @@ export class TabelComponent implements OnInit {
   }
 
   getEnglishwithThai(){
-
     this.httpClient.get('https://localhost:44399/api/Englishes/withthaiall').subscribe(
       body => {
         this.EnginTh_dataSource = body;

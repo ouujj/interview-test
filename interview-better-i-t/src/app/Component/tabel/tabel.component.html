@@ -1,6 +1,6 @@
 <mat-card-content>
-    <mat-grid-list>
-        <mat-list-item *ngFor="let VALUE of EnginTh_dataSource;let i = index ">
+    <mat-grid-list cols="3">
+        <mat-list-item *ngFor="let VALUE of EnginTh_dataSource; let i = index ">
             <mat-card class="example-chip-list">
                 <div>
                     <a>{{VALUE.word}} </a>
